@@ -1,0 +1,17 @@
+{
+    "name": "eabay/yer",
+    "description": "PHP Geolocation Library",
+    "keywords": ["geolocation"],
+    "homepage": "https://github.com/eabay/yer",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {"name": "Erhan Abay", "homepage": "http://erhanabay.com"}
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "autoload": {
+        "psr-0": {"Yer": "lib/"}
+    }
+}
