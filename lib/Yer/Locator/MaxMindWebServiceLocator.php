@@ -1,15 +1,36 @@
 <?php
+/*
+ * This file is part of the Yer package.
+ * 
+ * (c) Erhan Abay <erhanabay@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Yer\Locator;
 
 use Yer\Location;
 
+/**
+ * Locator class for MaxMind WebService
+ * 
+ * @link http://www.maxmind.com/app/web_services
+ * 
+ * @author Erhan Abay <erhanabay@gmail.com>
+ */
 class MaxMindWebServiceLocator extends AbstractLocator
 {
+    /**
+     * License for MaxMind
+     * 
+     * @var string
+     */
     protected $license;
     
     /**
      * List of error codes returned by service
+     * 
      * @link http://www.maxmind.com/app/web_services_codes
      */
     const IP_NOT_FOUND              = 'IP_NOT_FOUND';
@@ -31,11 +52,19 @@ class MaxMindWebServiceLocator extends AbstractLocator
         self::MAX_REQUESTS_PER_LICENSE => 'Max requests per license reached'
     );
     
+    /**
+     * Constructor
+     * 
+     * @param string $license
+     */
     public function __construct($license)
     {
         $this->license = $license;
     }
     
+    /**
+     * @see AbstractLocator::process()
+     */
     protected function process()
     {
         $response = file_get_contents('http://geoip3.maxmind.com/f?' . http_build_query(array(

@@ -1,20 +1,55 @@
 <?php
+/*
+ * This file is part of the Yer package.
+ * 
+ * (c) Erhan Abay <erhanabay@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Yer\Validator;
 
+/**
+ * Validates an IP address against different configuration options.
+ * 
+ * @author Erhan Abay <erhanabay@gmail.com>
+ */
 class IpValidator implements ValidatorInterface
 {
+    /**
+     * Configuration parameters
+     * 
+     * ipv4  Check IP address against IPv4 pattern
+     * ipv6  Check IP address against IPv6 pattern
+     * local Check IP address against being a local IP
+     * 
+     * @var array
+     */
     protected $config = array(
         'ipv4' => true,
         'ipv6' => false,
     	'local' => true
     );
     
+    /**
+     * @see IpValidator::$config
+     * 
+     * @param array $config
+     */
     public function __construct(array $config = array())
     {
         $this->config = array_merge($this->config, $config);
     }
     
+    /**
+     * Validated given IP address
+     * See IpValidator::$config for how it validates 
+     * 
+     * @param string $value Value to check against
+     * 
+     * @see ValidatorInterface::validate()
+     */
     public function validate($value)
     {
         if (!is_string($value) ||
@@ -33,6 +68,9 @@ class IpValidator implements ValidatorInterface
      * Validates an IPv4 address
      *
      * @param string $value
+     * 
+     * @return boolean true  when $value is a valid ipv6 address
+     *                 false otherwise
      */
     protected function validateIPv4($value) {
         $ip2long = ip2long($value);
@@ -46,9 +84,10 @@ class IpValidator implements ValidatorInterface
     /**
      * Validates an IPv6 address
      *
-     * @param  string $value Value to check against
-     * @return boolean True when $value is a valid ipv6 address
-     *                 False otherwise
+     * @param string $value Value to check against
+     * 
+     * @return boolean true  when $value is a valid ipv6 address
+     *                 false otherwise
      */
     protected function validateIPv6($value) {
         if (strlen($value) < 3) {
@@ -84,8 +123,10 @@ class IpValidator implements ValidatorInterface
 	/**
 	 * Detects whether IP address is local or not 
 	 *
-	 * @param string $ip IP address to check
-	 * @return bool
+	 * @param string $ip Value to check against
+	 * 
+	 * @return boolean true  when $value is a local IP address
+     *                 false otherwise
 	 */
 	protected function isLocal($value)
 	{

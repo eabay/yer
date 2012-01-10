@@ -1,15 +1,55 @@
 <?php
+/*
+ * This file is part of the Yer package.
+ * 
+ * (c) Erhan Abay <erhanabay@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Yer\Locator;
 
 use Yer\Location;
 
+/**
+ * Locator class for geobytes.com
+ * 
+ * @link http://www.geobytes.com/
+ * 
+ * @author Erhan Abay <erhanabay@gmail.com>
+ */
 class GeobytesLocator extends AbstractLocator
 {
+    /**
+     * Email address for geobytes.com authentication
+     * 
+     * @var string
+     */
     protected $email;
+    
+    /**
+     * Password address for geobytes.com authentication
+     * 
+     * @var string
+     */
     protected $password;
+    
+    /**
+     * Turn on/off SSL
+     * 
+     * @var boolean
+     */
     protected $ssl;
     
+    /**
+     * 
+     * Contructor
+     * 
+     * @param boolean $ssl      Turn on/off SSL
+     * @param string  $email    Email address for geobytes.com authentication
+     * @param string  $password Password address for geobytes.com authentication
+     */
     public function __construct($ssl = false, $email = null, $password = null)
     {
         $this->email = $email;
@@ -17,6 +57,9 @@ class GeobytesLocator extends AbstractLocator
         $this->ssl = (bool) $ssl;
     }
     
+    /**
+     * @see AbstractLocator::process()
+     */
     protected function process()
     {
         $uri   = ($this->ssl ? 'https://' : 'http://') . 'www.geobytes.com/IpLocator.htm?GetLocation&';
