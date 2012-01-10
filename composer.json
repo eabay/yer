@@ -1,7 +1,7 @@
 {
     "name": "eabay/yer",
     "description": "PHP Geolocation Library",
-    "keywords": ["geolocation"],
+    "keywords": ["geolocation", "maxmind", "geobytes"],
     "homepage": "https://github.com/eabay/yer",
     "type": "library",
     "license": "MIT",
